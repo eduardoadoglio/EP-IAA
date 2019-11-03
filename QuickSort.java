@@ -10,25 +10,15 @@ public class QuickSort{
 
 	public static void main(String[] args){
 		
-		final File folder = new File("/home/local/USPEACHSI/a11271077/Documentos/txt");
+		final File folder = new File("/home/adoglio/Documents/EP-IAA/txt/");
 
 		listFilesForFolder(folder);
-		/*int[] arr = getArrayFromFile("1K_Array_1.txt");
-		int start = 0;
-		int end = arr.length -1;
-		long startNano = System.nanoTime();
-		quickSort(arr, start, end);
-		//printArr(arr);
-		long endNano = System.nanoTime();
-		long finalNano = endNano - startNano;
-		System.out.printf("Tempo de execução: %d", finalNano);*/
 	}
 
 	public static int[] getArrayFromFile(String filename){
 		try{
 
-		FileInputStream fstream = new FileInputStream(
-"txt/"+filename);
+		FileInputStream fstream = new FileInputStream("txt/"+filename);
 	
 		DataInputStream in = new DataInputStream(fstream);
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -88,14 +78,17 @@ public class QuickSort{
 
 	public static void listFilesForFolder(final File folder) {
 		for (final File fileEntry : folder.listFiles()) {
+                long startLeitura = System.nanoTime();
 				int[] arr = getArrayFromFile(fileEntry.getName());
-				int start = 0;
+				long endLeitura = System.nanoTime();
+                long tempoLeitura = endLeitura - startLeitura;
+                int start = 0;
 				int end = arr.length -1;
-				long startNano = System.nanoTime();
+				long startSort = System.nanoTime();
 				quickSort(arr, start, end);
-				long endNano = System.nanoTime();
-				long finalNano = endNano - startNano;
-				System.out.printf("Tamanho do array: %d\nTempo de execução: %d",arr.length, finalNano);
+				long endSort = System.nanoTime();
+				long tempoSort = endSort - startSort;
+                System.out.printf("%s %d %d %d np270e5g Quick Sort Java 11.0.4 GNU/Linux 64\n",fileEntry.getName(), arr.length, tempoLeitura, tempoSort);
 			}
 		}
 
